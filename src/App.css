@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #e8e8e8;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.menuBar {
+  padding: 0 20px;
+  border-bottom: solid 1px #e8e8e8;
+  overflow: auto;
+  box-shadow: 0 0 30px #f3f1f1;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  background-color: white;
+}
+
+.logo {
+  width: 150px;
+  float: left;
+}
+
+.logo a {
+  display: inline-block;
+  font-size: 20px;
+  padding: 19px 20px;
+  text-transform: capitalize;
+}
+
+.menu-options {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 20px;
+}
+
+.responsive-menu {
+  display: none;
+}
+
+.res-options {
+  position: absolute;
+  margin: 0px 0px 0px -100px;
+  display: none;
+}
+
+.menu-text {
+  padding: 6px 10px;
+}
+
+.active p {
+  background-color: blue;
   color: white;
+  font-weight: 500;
+  border-radius: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+.home-grid {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.addContact-main {
+  display: flex;
+  justify-content: center;
+}
+
+.addContact-div {
+  width: 30%;
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  .logo a {
+    margin-left: -20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .logo a {
+    padding: 15px 20px;
+  }
+
+  .menu-options {
+    display: none;
+  }
+
+  .responsive-menu {
+    display: block;
+  }
+  .res-options {
+    display: block;
+  }
+
+  .addContact-div {
+    width: 70%;
   }
 }
