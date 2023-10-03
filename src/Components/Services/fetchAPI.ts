@@ -9,9 +9,19 @@ export class ContactService {
   };
 
   public static createContact = (
-    teacherData: IContact
+    contactData: IContact
   ): Promise<{ data: IContact }> => {
     const dataUrl = `${this.serverUrl}/allemp/create`;
-    return axios.post(dataUrl, teacherData);
+    return axios.post(dataUrl, contactData);
+  };
+
+  public static updateContact = (contactData: IContact, id: number) => {
+    const dataUrl = `${this.serverUrl}/allemp/update/${id}`;
+    return axios.put(dataUrl, contactData);
+  };
+
+  public static deleteContact = (id: number) => {
+    const dataUrl = `${this.serverUrl}/allemp/delete/${id}`;
+    return axios.delete(dataUrl);
   };
 }

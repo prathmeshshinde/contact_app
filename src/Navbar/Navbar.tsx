@@ -73,24 +73,6 @@ const Navbar: React.FC = () => {
           <p className="menu-text">Home</p>
         </div>
       </div>
-
-      {/* <div className="menuCon">
-        <div className="rightMenu">
-          <RightMenu />
-        </div>
-        <Button className="barsMenu" type="primary" onClick={showDrawer}>
-          <span className="barsBtn"></span>
-        </Button>
-        <Drawer
-          title="Basic Drawer"
-          placement="right"
-          closable={true}
-          onClose={onClose}
-          open={open}
-        >
-          <RightMenu />
-        </Drawer>
-      </div> */}
     </nav>
   );
 };
