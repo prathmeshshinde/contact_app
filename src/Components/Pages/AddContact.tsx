@@ -3,26 +3,33 @@ import React from "react";
 import { ContactService } from "../Services/fetchAPI";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { Title } = Typography;
 
-const AddContact: React.FC = () => {
+const AddContact: React.FC<any> = ({
+  showToastMessage,
+  showErrorToastMessage,
+}) => {
   const navigate = useNavigate();
 
   const handleSubmit = (values: any) => {
     ContactService.createContact(values)
       .then((res) => {
         if (res && res.data) {
+          showToastMessage("New contact created");
           navigate("/");
         }
       })
       .catch((err) => {
-        console.log(err);
+        showErrorToastMessage(err.message);
       });
   };
 
   return (
     <div className="addContact-main">
+      <ToastContainer />
       <div className="addContact-div">
         <Title level={3} style={{ textAlign: "center", color: "#52C41A" }}>
           Add Contact

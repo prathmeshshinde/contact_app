@@ -1,5 +1,5 @@
-import { Button, Card, Divider, Image } from "antd";
-import React from "react";
+import { Button, Card, Divider, Image, Popconfirm } from "antd";
+import React, { useEffect } from "react";
 import { IContact } from "../Interface/ContactInterface";
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
@@ -9,18 +9,27 @@ const { Title, Text } = Typography;
 
 interface IProps {
   contactItem: IContact;
+  getContactData: any;
+  showToastMessage: any;
+  showErrorToastMessage: any;
 }
 
-const ContactCard: React.FC<IProps> = ({ contactItem }) => {
+const ContactCard: React.FC<IProps> = ({
+  contactItem,
+  getContactData,
+  showToastMessage,
+  showErrorToastMessage,
+}) => {
   const handleDelete = (id: number) => {
     ContactService.deleteContact(id)
       .then((res) => {
         if (res && res.data) {
-          console.log("deleted Successfully");
+          showToastMessage("Contact deleted successfully!");
+          getContactData();
         }
       })
       .catch((err) => {
-        console.log(err);
+        showErrorToastMessage(err.message);
       });
   };
 
@@ -51,13 +60,17 @@ const ContactCard: React.FC<IProps> = ({ contactItem }) => {
         <Text type="secondary">Mobile No:</Text> {contactItem.mobile_emp}
       </Title>
       <div className="button-group">
-        <Button
-          style={buttonStyle}
-          danger
-          onClick={() => handleDelete(contactItem.contact_id)}
+        <Popconfirm
+          title="Delete Contact"
+          description="Are you sure to delete this contact?"
+          onConfirm={() => handleDelete(contactItem.contact_id)}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </Button>
+          <Button style={buttonStyle} danger>
+            Delete
+          </Button>
+        </Popconfirm>
 
         <Link
           to={`/update/${contactItem.contact_id}`}

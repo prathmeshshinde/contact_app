@@ -3,12 +3,14 @@ import { IContact } from "../Interface/ContactInterface";
 import { ContactService } from "../Services/fetchAPI";
 import { Col, Row } from "antd";
 import ContactCard from "../Card/ContactCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface IState {
   contacts: IContact[];
 }
 
-const Home: React.FC = () => {
+const Home: React.FC<any> = ({ showToastMessage, showErrorToastMessage }) => {
   const [contact, setContact] = useState<IState>({ contacts: [] });
 
   const getContactData = () => {
@@ -35,7 +37,12 @@ const Home: React.FC = () => {
             return (
               <Col xs={24} sm={15} md={10} xl={8} key={index}>
                 <div>
-                  <ContactCard contactItem={contactItems} />
+                  <ContactCard
+                    contactItem={contactItems}
+                    getContactData={getContactData}
+                    showToastMessage={showToastMessage}
+                    showErrorToastMessage={showErrorToastMessage}
+                  />
                 </div>
               </Col>
             );

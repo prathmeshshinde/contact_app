@@ -6,7 +6,10 @@ import { Typography } from "antd";
 
 const { Title } = Typography;
 
-const UpdateContact: React.FC = () => {
+const UpdateContact: React.FC<any> = ({
+  showToastMessage,
+  showErrorToastMessage,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { contactDetails } = location.state;
@@ -15,11 +18,12 @@ const UpdateContact: React.FC = () => {
     ContactService.updateContact(values, contactDetails.contact_id)
       .then((res) => {
         if (res && res.data) {
+          showToastMessage("Contact Updated Successfully");
           navigate("/");
         }
       })
       .catch((err) => {
-        console.log(err);
+        showErrorToastMessage(err.message);
       });
   };
 
